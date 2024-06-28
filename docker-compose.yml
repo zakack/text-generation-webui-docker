@@ -3,14 +3,14 @@ services:
     image: atinoda/text-generation-webui:default-nvidia # Specify variant as the :tag
     container_name: text-generation-webui
     environment:
-      - EXTRA_LAUNCH_ARGS="--listen --verbose" # Custom launch args (e.g., --model MODEL_NAME)
+      - EXTRA_LAUNCH_ARGS="--listen --verbose --api --trust-remote-code" # Custom launch args (e.g., --model MODEL_NAME)
 #      - BUILD_EXTENSIONS_LIVE="coqui_tts whisper_stt" # Install named extensions during every container launch. THIS WILL SIGNIFICANLTLY SLOW LAUNCH TIME AND IS NORMALLY NOT REQUIRED.
 #      - OPENEDAI_EMBEDDING_MODEL=intfloat/e5-large-v2  # Specify custom model for embeddings
 #      - OPENEDAI_EMBEDDING_DEVICE=cuda  # Specify processing device for embeddings
     ports:
       - 7860:7860  # Default web port
-#      - 5000:5000  # Default API port
-#      - 5005:5005  # Default streaming port
+      - 5000:5000  # Default API port
+      - 5005:5005  # Default streaming port
     volumes:
       - ./config/cache:/root/.cache  # WARNING: Libraries may save large files here!
       - ./config/characters:/app/characters
